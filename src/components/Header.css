@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@600&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,400;1,600&display=swap");
+
+.header-container {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background-color: #f4a460;
+  background-image: linear-gradient(315deg, #f4a460 0%, #b05f03 74%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+}
+
+.brand h1 {
+  color: white;
+  font-family: "Playpen Sans", cursive;
+}
+
+.brand img {
+  width: 2.5rem;
+}
+
+.header-container .menu {
+  display: flex;
+  flex-direction: row;
+}
+
+.menu .menu-item {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: x-large;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+}
+
+.menu .menu-item a {
+  color: black;
+  text-decoration: none;
+}
+
+.menu .menu-item img {
+  height: 3rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 0.3rem;
+  border-radius: 10px;
+}
+
+.menu .menu-item a:hover {
+  color: white;
+}
+
+.menu .menu-item:hover {
+  color: white;
+  cursor: pointer;
+}
