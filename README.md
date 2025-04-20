@@ -22,5 +22,5 @@ Follow these steps to get the app running locally on your machine:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/vimal567/teerex-store.git
+   git clone https://github.com/Vimal567/Teerex-store.git
    cd teerex-store

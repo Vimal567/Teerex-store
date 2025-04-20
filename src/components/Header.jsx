@@ -17,13 +17,12 @@ const Header = () => {
           <li className='menu-item'>
             <Link to="/">Products</Link>
           </li>
-          : <Link to="/cart">
+          : 
             <li className="menu-item">
               <Link to="/cart">
                 <img src="/assets/cart.svg" alt="cart navigation" />
               </Link>
-            </li>
-          </Link>}
+            </li>}
       </ul>
     </div>
   )

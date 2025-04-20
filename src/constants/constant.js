@@ -1,0 +1,1 @@
+export const TRY_AGAIN = "Oops something went wrong, please try again.";
