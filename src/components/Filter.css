@@ -1,0 +1,38 @@
+.filter-section .filter-container {
+  margin: 0.4rem 0rem 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-container .form-group {
+  text-wrap: nowrap;
+  margin-bottom: 0.4rem;
+}
+
+.form-group label {
+  margin-left: 5px;
+}
+
+/* Mobile View */
+@media screen and (max-width: 768px) {
+  .filter-modal {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .filter-modal .filter-section  {
+    width: 80%;
+  }
+
+  .filter-container {
+    flex-wrap: wrap;
+    flex-direction: row !important;
+  }
+
+  .form-group input {
+    margin-left: 15px;
+  }
+  
+
+}
