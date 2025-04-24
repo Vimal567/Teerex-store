@@ -12,6 +12,7 @@ const Dashboard = () => {
 
   const [products, setProducts] = useState([]);
   const [searchedProducts, setSearchedProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const modalRef = useRef();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -20,6 +21,7 @@ const Dashboard = () => {
       const response = await axios.get(ENDPOINT);
       setProducts(response.data);
       setSearchedProducts(response.data);
+      setFilteredProducts(response.data);
     } catch (error) {
       enqueueSnackbar(TRY_AGAIN, { variant: 'error' });
     }
@@ -68,8 +70,24 @@ const Dashboard = () => {
         <div className="filter-section">
           <Filter />
         </div>
-        <div className="product-grid-section">product</div>
+        <div className="product-grid-section">
+          {filteredProducts && filteredProducts.length && filteredProducts.map((product, index) => {
+            return <div className="product-card" key={index}>
+              <img src={product.imageURL} alt="product" />
+              <div className="details-container">
+                <span>
+                  {product.name}
+                </span>
+                <span>
+                  Rs. {product.price}
+                </span>
+              </div>
+              <button type='button'>Add to Cart</button>
+            </div>
+          })}
+        </div>
       </div>
+
       <div className="filter-modal" ref={modalRef}>
         <div className="filter-section">
           <button onClick={closeFilter}>

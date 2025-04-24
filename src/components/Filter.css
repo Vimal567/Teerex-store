@@ -15,16 +15,6 @@
 
 /* Mobile View */
 @media screen and (max-width: 768px) {
-  .filter-modal {
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .filter-modal .filter-section  {
-    width: 80%;
-  }
-
   .filter-container {
     flex-wrap: wrap;
     flex-direction: row !important;

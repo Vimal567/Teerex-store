@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import "./Filter.css";
 
 const colours = ["Red", "Blue", "Green"];
@@ -11,19 +11,50 @@ const Filter = () => {
   const [colourFilterData, setColourFilterData] = useState([]);
   const [genderFilter, setGenderFilter] = useState([]);
   const [priceFilterData, setPriceFilterData] = useState([]);
-  const [productTypeFilter, setProductTypeFilter] = useState([]);
+  const [clothTypeFilter, setClothTypeFilter] = useState([]);
 
-  const handleColourFilterChange = () => {
-
+  const onFilterColorChange = (event) => {
+    const isChecked = event.target.checked;
+    if (isChecked) {
+      setColourFilterData((prevState) => [...prevState, event.target.value]);
+    } else {
+      setColourFilterData((prevState) =>
+        prevState.filter((item) => item !== event.target.value)
+      );
+    }
   };
-  const handleGenderFilterChange = () => {
 
+  const onFilterGenderChange = (event) => {
+    const isChecked = event.target.checked;
+    if (isChecked) {
+      setGenderFilter((prevState) => [...prevState, event.target.value]);
+    } else {
+      setGenderFilter((prevState) =>
+        prevState.filter((item) => item !== event.target.value)
+      );
+    }
   };
-  const handlePriceFilterChange = () => {
 
+  const onFilterPriceChange = (event) => {
+    const isChecked = event.target.checked;
+    if (isChecked) {
+      setPriceFilterData((prevState) => [...prevState, event.target.value]);
+    } else {
+      setPriceFilterData((prevState) =>
+        prevState.filter((item) => item !== event.target.value)
+      );
+    }
   };
-  const handleProductTypeFilter = () => {
 
+  const onFilterClothTypeChange = (event) => {
+    const isChecked = event.target.checked;
+    if (isChecked) {
+      setClothTypeFilter((prevState) => [...prevState, event.target.value]);
+    } else {
+      setClothTypeFilter((prevState) =>
+        prevState.filter((item) => item !== event.target.value)
+      );
+    }
   };
 
   return (
@@ -37,7 +68,7 @@ const Filter = () => {
               type="checkbox"
               value={colour}
               checked={colourFilterData.includes(colour)}
-              onChange={handleColourFilterChange}
+              onChange={onFilterColorChange}
             />
             <label>
               {colour}
@@ -48,16 +79,16 @@ const Filter = () => {
 
       <h2>Gender</h2>
       <div className="filter-container">
-        {gender.map((gen, index) => (
+        {gender.map((gender, index) => (
           <div className='form-group' key={index}>
             <input
               type="checkbox"
-              value={gen}
-              checked={genderFilter.includes(gen)}
-              onChange={handleGenderFilterChange}
+              value={gender}
+              checked={genderFilter.includes(gender)}
+              onChange={onFilterGenderChange}
             />
             <label>
-              {gen}
+              {gender}
             </label>
           </div>
         ))}
@@ -71,7 +102,7 @@ const Filter = () => {
               type="checkbox"
               value={priceValue}
               checked={priceFilterData.includes(priceValue)}
-              onChange={handlePriceFilterChange}
+              onChange={onFilterPriceChange}
             />
             <label>
               {priceValue}
@@ -87,8 +118,8 @@ const Filter = () => {
             <input
               type="checkbox"
               value={productType}
-              checked={productTypeFilter.includes(productType)}
-              onChange={handleProductTypeFilter}
+              checked={clothTypeFilter.includes(productType)}
+              onChange={onFilterClothTypeChange}
             />
             <label>
               {productType}
