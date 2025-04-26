@@ -11,8 +11,12 @@ const ENDPOINT = 'https://geektrust.s3.ap-southeast-1.amazonaws.com/coding-probl
 const Dashboard = () => {
 
   const [products, setProducts] = useState([]);
-  const [searchedProducts, setSearchedProducts] = useState([]);
+  const [searchValue, setSearchValue] = useState(null);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [colourFilterData, setColourFilterData] = useState([]);
+  const [genderFilterData, setGenderFilterData] = useState([]);
+  const [priceFilterData, setPriceFilterData] = useState([]);
+  const [clothTypeFilter, setClothTypeFilter] = useState([]);
   const modalRef = useRef();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -20,23 +24,49 @@ const Dashboard = () => {
     try {
       const response = await axios.get(ENDPOINT);
       setProducts(response.data);
-      setSearchedProducts(response.data);
       setFilteredProducts(response.data);
     } catch (error) {
       enqueueSnackbar(TRY_AGAIN, { variant: 'error' });
     }
   };
 
-  const searchProducts = (event) => {
-    const value = event.target.value;
-    if (value || !value.length) {
-      searchedProducts(products);
-      return;
+  const applyAllFilters = (value) => {
+    let updated = [...products];
+  
+    if (colourFilterData.length) {
+      updated = updated.filter((item) => colourFilterData.includes(item.color));
     }
-    const foundProducts = products.filter(product => {
-      return product.name.toLowerCase().includes(value);
-    });
-    setSearchedProducts(foundProducts);
+  
+    if (genderFilterData.length) {
+      updated = updated.filter((item) => genderFilterData.includes(item.gender));
+    }
+  
+    if (clothTypeFilter.length) {
+      updated = updated.filter((item) => clothTypeFilter.includes(item.type));
+    }
+  
+    if (priceFilterData.length) {
+      updated = updated.filter((item) => {
+        return priceFilterData.some((range) => {
+          const [min, max] = range.split('-').map(Number);
+          return item.price >= min && item.price <= max;
+        });
+      });
+    }
+  
+    if (value && value.length) {
+      updated = updated.filter((item) =>
+        item.name.toLowerCase().includes(value.toLowerCase())
+      );
+    }
+
+    setFilteredProducts(updated);
+  };
+
+  const initiateSearch = (event) => {
+    const value = event.target.value;
+    setSearchValue(value);
+    applyAllFilters(value);
   };
 
   const openFilter = () => {
@@ -48,8 +78,12 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+    applyAllFilters(searchValue);
+  }, [colourFilterData, genderFilterData, priceFilterData, clothTypeFilter, searchValue]);
+
+  useEffect(() => {
     fetchProducts();
-  });
+  }, []);
 
 
   return (
@@ -57,7 +91,7 @@ const Dashboard = () => {
       <Header />
 
       <div className="search-container">
-        <input type="search" name="search" id="search" placeholder='Search for products...' onKeyDown={searchProducts} />
+        <input type="search" name="search" id="search" placeholder='Search for products...' onChange={initiateSearch} />
         <div className="search-button-container" >
           <img src="assets/search.svg" alt="search icon" />
         </div>
@@ -68,8 +102,18 @@ const Dashboard = () => {
 
       <div className="filter-product-grid-section">
         <div className="filter-section">
-          <Filter />
+        <Filter
+            colourFilterData={colourFilterData} 
+            setColourFilterData={setColourFilterData} 
+            genderFilterData={genderFilterData} 
+            setGenderFilterData={setGenderFilterData} 
+            priceFilterData={priceFilterData} 
+            setPriceFilterData={setPriceFilterData} 
+            clothTypeFilter={clothTypeFilter} 
+            setClothTypeFilter={setClothTypeFilter} 
+          />
         </div>
+
         <div className="product-grid-section">
           {filteredProducts && filteredProducts.length && filteredProducts.map((product, index) => {
             return <div className="product-card" key={index}>
@@ -93,7 +137,16 @@ const Dashboard = () => {
           <button onClick={closeFilter}>
             <img src="assets/close.svg" alt="close icon" />
           </button>
-          <Filter closeFilter={closeFilter} />
+          <Filter 
+            colourFilterData={colourFilterData} 
+            setColourFilterData={setColourFilterData} 
+            genderFilterData={genderFilterData} 
+            setGenderFilterData={setGenderFilterData} 
+            priceFilterData={priceFilterData} 
+            setPriceFilterData={setPriceFilterData} 
+            clothTypeFilter={clothTypeFilter} 
+            setClothTypeFilter={setClothTypeFilter} 
+          />
         </div>
       </div>
     </>
