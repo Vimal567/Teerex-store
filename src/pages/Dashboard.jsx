@@ -4,9 +4,7 @@ import Header from '../components/Header';
 import Filter from '../components/Filter';
 import { useSnackbar } from 'notistack';
 import axios from 'axios';
-import { TRY_AGAIN } from '../constants/constant';
-
-const ENDPOINT = 'https://geektrust.s3.ap-southeast-1.amazonaws.com/coding-problems/shopping-cart/catalogue.json';
+import { TRY_AGAIN, ENDPOINT } from '../constants/constant';
 
 const Dashboard = () => {
 

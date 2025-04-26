@@ -1,10 +1,5 @@
-import React, { useState } from 'react';
 import "./Filter.css";
-
-const colours = ["Red", "Blue", "Green"];
-const gender = ["Men", "Women"];
-const price = ["0 - 250", "250 - 450", "450 - 100000"];
-const clothType = ["Polo", "Hoddie", "Basic"];
+import { COLOURS_LIST, GENDER_LIST, PRICE_LIST, CLOTH_TYPE_LIST } from '../constants/constant';
 
 const Filter = ({
   colourFilterData,
@@ -30,7 +25,7 @@ const Filter = ({
     <form>
       <h2>Color</h2>
       <div className="filter-container">
-        {colours.map((colour, index) => (
+        {COLOURS_LIST.map((colour, index) => (
           <div className='form-group' key={index}>
             <input
               type="checkbox"
@@ -45,7 +40,7 @@ const Filter = ({
 
       <h2>Gender</h2>
       <div className="filter-container">
-        {gender.map((gender, index) => (
+        {GENDER_LIST.map((gender, index) => (
           <div className='form-group' key={index}>
             <input
               type="checkbox"
@@ -60,7 +55,7 @@ const Filter = ({
 
       <h2>Price</h2>
       <div className="filter-container">
-        {price.map((priceValue, index) => (
+        {PRICE_LIST.map((priceValue, index) => (
           <div className='form-group' key={index}>
             <input
               type="checkbox"
@@ -75,7 +70,7 @@ const Filter = ({
 
       <h2>Type</h2>
       <div className="filter-container">
-        {clothType.map((productType, index) => (
+        {CLOTH_TYPE_LIST.map((productType, index) => (
           <div className='form-group' key={index}>
             <input
               type="checkbox"
