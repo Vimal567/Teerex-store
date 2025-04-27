@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import './Dashboard.css';
-import Header from '../components/Header';
 import Filter from '../components/Filter';
 import { useSnackbar } from 'notistack';
 import axios from 'axios';
 import { TRY_AGAIN, ENDPOINT } from '../constants/constant';
+import CartContext from '../context/cart-context';
 
 const Dashboard = () => {
 
@@ -17,6 +17,7 @@ const Dashboard = () => {
   const [clothTypeFilter, setClothTypeFilter] = useState([]);
   const modalRef = useRef();
   const { enqueueSnackbar } = useSnackbar();
+  const { addToCart } = useContext(CartContext);
 
   const fetchProducts = async () => {
     try {
@@ -29,22 +30,22 @@ const Dashboard = () => {
   };
 
   const applyAllFilters = (value) => {
-    let updated = [...products];
+    let updatedProducts = [...products];
   
     if (colourFilterData.length) {
-      updated = updated.filter((item) => colourFilterData.includes(item.color));
+      updatedProducts = updatedProducts.filter((item) => colourFilterData.includes(item.color));
     }
   
     if (genderFilterData.length) {
-      updated = updated.filter((item) => genderFilterData.includes(item.gender));
+      updatedProducts = updatedProducts.filter((item) => genderFilterData.includes(item.gender));
     }
   
     if (clothTypeFilter.length) {
-      updated = updated.filter((item) => clothTypeFilter.includes(item.type));
+      updatedProducts = updatedProducts.filter((item) => clothTypeFilter.includes(item.type));
     }
   
     if (priceFilterData.length) {
-      updated = updated.filter((item) => {
+      updatedProducts = updatedProducts.filter((item) => {
         return priceFilterData.some((range) => {
           const [min, max] = range.split('-').map(Number);
           return item.price >= min && item.price <= max;
@@ -53,12 +54,12 @@ const Dashboard = () => {
     }
   
     if (value && value.length) {
-      updated = updated.filter((item) =>
+      updatedProducts = updatedProducts.filter((item) =>
         item.name.toLowerCase().includes(value.toLowerCase())
       );
     }
 
-    setFilteredProducts(updated);
+    setFilteredProducts(updatedProducts);
   };
 
   const initiateSearch = (event) => {
@@ -86,15 +87,13 @@ const Dashboard = () => {
 
   return (
     <>
-      <Header />
-
       <div className="search-container">
         <input type="search" name="search" id="search" placeholder='Search for products...' onChange={initiateSearch} />
         <div className="search-button-container" >
-          <img src="assets/search.svg" alt="search icon" />
+          <img src="assets/search-icon.svg" alt="search icon" />
         </div>
         <div className="filter-button-container" onClick={openFilter}>
-          <img src="assets/filter.svg" alt="filter icon" />
+          <img src="assets/filter-icon.svg" alt="filter icon" />
         </div>
       </div >
 
@@ -124,7 +123,7 @@ const Dashboard = () => {
                   Rs. {product.price}
                 </span>
               </div>
-              <button type='button'>Add to Cart</button>
+              <button type='button' onClick={() =>addToCart(product)}>Add to Cart</button>
             </div>
           })}
         </div>
@@ -133,7 +132,7 @@ const Dashboard = () => {
       <div className="filter-modal" ref={modalRef}>
         <div className="filter-section">
           <button onClick={closeFilter}>
-            <img src="assets/close.svg" alt="close icon" />
+            <img src="assets/close-icon.svg" alt="close icon" />
           </button>
           <Filter 
             colourFilterData={colourFilterData} 
