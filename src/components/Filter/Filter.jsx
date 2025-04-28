@@ -1,5 +1,5 @@
 import "./Filter.css";
-import { COLOURS_LIST, GENDER_LIST, PRICE_LIST, CLOTH_TYPE_LIST } from '../constants/constant';
+import { COLOURS_LIST, GENDER_LIST, PRICE_LIST, CLOTH_TYPE_LIST } from '../../constants/constant';
 
 const Filter = ({
   colourFilterData,

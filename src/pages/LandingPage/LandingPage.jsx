@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef, useContext, Fragment } from 'react';
-import './Dashboard.css';
-import Filter from '../components/Filter';
+import './LandingPage.css';
+import Filter from '../../components/Filter/Filter';
 import { useSnackbar } from 'notistack';
 import axios from 'axios';
-import { TRY_AGAIN, ENDPOINT } from '../constants/constant';
-import CartContext from '../context/cart-context';
+import { TRY_AGAIN, ENDPOINT } from '../../constants/constant';
+import CartContext from '../../context/cart-context';
 
-const Dashboard = () => {
+const LandingPage = () => {
 
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -157,4 +157,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard;
+export default LandingPage;
