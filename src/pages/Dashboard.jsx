@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useEffect, useRef, useContext, Fragment } from 'react';
 import './Dashboard.css';
 import Filter from '../components/Filter';
 import { useSnackbar } from 'notistack';
@@ -9,6 +9,7 @@ import CartContext from '../context/cart-context';
 const Dashboard = () => {
 
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [searchValue, setSearchValue] = useState(null);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [colourFilterData, setColourFilterData] = useState([]);
@@ -20,12 +21,16 @@ const Dashboard = () => {
   const { addToCart } = useContext(CartContext);
 
   const fetchProducts = async () => {
+    setIsLoading(true);
     try {
       const response = await axios.get(ENDPOINT);
       setProducts(response.data);
       setFilteredProducts(response.data);
     } catch (error) {
+      // setIsLoading(false);
       enqueueSnackbar(TRY_AGAIN, { variant: 'error' });
+    } finally {
+      // setIsLoading(false);
     }
   };
 
@@ -87,65 +92,67 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="search-container">
-        <input type="search" name="search" id="search" placeholder='Search for products...' onChange={initiateSearch} />
-        <div className="search-button-container" >
-          <img src="assets/search-icon.svg" alt="search icon" />
-        </div>
-        <div className="filter-button-container" onClick={openFilter}>
-          <img src="assets/filter-icon.svg" alt="filter icon" />
-        </div>
-      </div >
+      {isLoading ? <div className='loading-container'>Loading Please wait...</div> : <Fragment>
+        <div className="search-container">
+          <input type="search" name="search" id="search" placeholder='Search for products...' onChange={initiateSearch} />
+          <div className="search-button-container" >
+            <img src="assets/search-icon.svg" alt="search icon" />
+          </div>
+          <div className="filter-button-container" onClick={openFilter}>
+            <img src="assets/filter-icon.svg" alt="filter icon" />
+          </div>
+        </div >
 
-      <div className="filter-product-grid-section">
-        <div className="filter-section">
-          <Filter
-            colourFilterData={colourFilterData}
-            setColourFilterData={setColourFilterData}
-            genderFilterData={genderFilterData}
-            setGenderFilterData={setGenderFilterData}
-            priceFilterData={priceFilterData}
-            setPriceFilterData={setPriceFilterData}
-            clothTypeFilter={clothTypeFilter}
-            setClothTypeFilter={setClothTypeFilter}
-          />
-        </div>
+        <div className="filter-product-grid-section">
+          <div className="filter-section">
+            <Filter
+              colourFilterData={colourFilterData}
+              setColourFilterData={setColourFilterData}
+              genderFilterData={genderFilterData}
+              setGenderFilterData={setGenderFilterData}
+              priceFilterData={priceFilterData}
+              setPriceFilterData={setPriceFilterData}
+              clothTypeFilter={clothTypeFilter}
+              setClothTypeFilter={setClothTypeFilter}
+            />
+          </div>
 
-        <div className="product-grid-section">
-          {filteredProducts && filteredProducts.length && filteredProducts.map((product, index) => {
-            return <div className="product-card" key={index}>
-              <img src={product.imageURL} alt="product" />
-              <div className="details-container">
-                <span>
-                  {product.name}
-                </span>
-                <span>
-                  Rs. {product.price}
-                </span>
+          <div className="product-grid-section">
+            {filteredProducts && filteredProducts.length && filteredProducts.map((product, index) => {
+              return <div className="product-card" key={index}>
+                <img src={product.imageURL} alt="product" />
+                <div className="details-container">
+                  <span>
+                    {product.name}
+                  </span>
+                  <span>
+                    Rs. {product.price}
+                  </span>
+                </div>
+                <button type='button' onClick={() => addToCart(product)}>Add to Cart</button>
               </div>
-              <button type='button' onClick={() => addToCart(product)}>Add to Cart</button>
-            </div>
-          })}
+            })}
+          </div>
         </div>
-      </div>
 
-      <div className="filter-modal" ref={modalRef}>
-        <div className="filter-section">
-          <button onClick={closeFilter}>
-            <img src="assets/close-icon.svg" alt="close icon" />
-          </button>
-          <Filter
-            colourFilterData={colourFilterData}
-            setColourFilterData={setColourFilterData}
-            genderFilterData={genderFilterData}
-            setGenderFilterData={setGenderFilterData}
-            priceFilterData={priceFilterData}
-            setPriceFilterData={setPriceFilterData}
-            clothTypeFilter={clothTypeFilter}
-            setClothTypeFilter={setClothTypeFilter}
-          />
+        <div className="filter-modal" ref={modalRef}>
+          <div className="filter-section">
+            <button onClick={closeFilter}>
+              <img src="assets/close-icon.svg" alt="close icon" />
+            </button>
+            <Filter
+              colourFilterData={colourFilterData}
+              setColourFilterData={setColourFilterData}
+              genderFilterData={genderFilterData}
+              setGenderFilterData={setGenderFilterData}
+              priceFilterData={priceFilterData}
+              setPriceFilterData={setPriceFilterData}
+              clothTypeFilter={clothTypeFilter}
+              setClothTypeFilter={setClothTypeFilter}
+            />
+          </div>
         </div>
-      </div>
+      </Fragment>}
     </>
   )
 }
