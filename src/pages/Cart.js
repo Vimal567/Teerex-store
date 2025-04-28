@@ -51,10 +51,10 @@ const Cart = () => {
         :
         <div className='empty-cart'>
           <div>
-            No items in the Cart
+            No items in the cart
             <img src='/assets/cart-icon.svg' alt='empty cart icon' />
           </div>
-          <div><Link to={"/"}>Click to navigate to products page</Link></div>
+          <div><Link to={"/"}>Click here to navigate to the products page</Link></div>
         </div>
       }
 

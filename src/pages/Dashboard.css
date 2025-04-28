@@ -100,7 +100,7 @@
   font-size: large;
 }
 
-.product-card > button {
+.product-card>button {
   width: 100%;
   height: 3rem;
   background-color: #e9a960;
@@ -109,17 +109,17 @@
   cursor: pointer;
 }
 
-.product-card > button:hover {
+.product-card>button:hover {
   background-color: #af7028;
 }
 
-.filter-section > button {
+.filter-section>button {
   position: absolute;
   top: 3%;
   right: 4%;
 }
 
-.filter-section button > img {
+.filter-section button>img {
   width: 1.3rem;
 }
 
@@ -144,7 +144,7 @@
     display: none;
   }
 
-  .filter-modal .filter-section  {
+  .filter-modal .filter-section {
     width: 90%;
     height: auto;
     position: fixed;

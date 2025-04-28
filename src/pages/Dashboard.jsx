@@ -31,19 +31,19 @@ const Dashboard = () => {
 
   const applyAllFilters = (value) => {
     let updatedProducts = [...products];
-  
+
     if (colourFilterData.length) {
       updatedProducts = updatedProducts.filter((item) => colourFilterData.includes(item.color));
     }
-  
+
     if (genderFilterData.length) {
       updatedProducts = updatedProducts.filter((item) => genderFilterData.includes(item.gender));
     }
-  
+
     if (clothTypeFilter.length) {
       updatedProducts = updatedProducts.filter((item) => clothTypeFilter.includes(item.type));
     }
-  
+
     if (priceFilterData.length) {
       updatedProducts = updatedProducts.filter((item) => {
         return priceFilterData.some((range) => {
@@ -52,7 +52,7 @@ const Dashboard = () => {
         });
       });
     }
-  
+
     if (value && value.length) {
       updatedProducts = updatedProducts.filter((item) =>
         item.name.toLowerCase().includes(value.toLowerCase())
@@ -99,15 +99,15 @@ const Dashboard = () => {
 
       <div className="filter-product-grid-section">
         <div className="filter-section">
-        <Filter
-            colourFilterData={colourFilterData} 
-            setColourFilterData={setColourFilterData} 
-            genderFilterData={genderFilterData} 
-            setGenderFilterData={setGenderFilterData} 
-            priceFilterData={priceFilterData} 
-            setPriceFilterData={setPriceFilterData} 
-            clothTypeFilter={clothTypeFilter} 
-            setClothTypeFilter={setClothTypeFilter} 
+          <Filter
+            colourFilterData={colourFilterData}
+            setColourFilterData={setColourFilterData}
+            genderFilterData={genderFilterData}
+            setGenderFilterData={setGenderFilterData}
+            priceFilterData={priceFilterData}
+            setPriceFilterData={setPriceFilterData}
+            clothTypeFilter={clothTypeFilter}
+            setClothTypeFilter={setClothTypeFilter}
           />
         </div>
 
@@ -123,7 +123,7 @@ const Dashboard = () => {
                   Rs. {product.price}
                 </span>
               </div>
-              <button type='button' onClick={() =>addToCart(product)}>Add to Cart</button>
+              <button type='button' onClick={() => addToCart(product)}>Add to Cart</button>
             </div>
           })}
         </div>
@@ -134,15 +134,15 @@ const Dashboard = () => {
           <button onClick={closeFilter}>
             <img src="assets/close-icon.svg" alt="close icon" />
           </button>
-          <Filter 
-            colourFilterData={colourFilterData} 
-            setColourFilterData={setColourFilterData} 
-            genderFilterData={genderFilterData} 
-            setGenderFilterData={setGenderFilterData} 
-            priceFilterData={priceFilterData} 
-            setPriceFilterData={setPriceFilterData} 
-            clothTypeFilter={clothTypeFilter} 
-            setClothTypeFilter={setClothTypeFilter} 
+          <Filter
+            colourFilterData={colourFilterData}
+            setColourFilterData={setColourFilterData}
+            genderFilterData={genderFilterData}
+            setGenderFilterData={setGenderFilterData}
+            priceFilterData={priceFilterData}
+            setPriceFilterData={setPriceFilterData}
+            clothTypeFilter={clothTypeFilter}
+            setClothTypeFilter={setClothTypeFilter}
           />
         </div>
       </div>

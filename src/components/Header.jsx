@@ -12,21 +12,21 @@ const Header = () => {
     <div className='header-container'>
       <div className="brand">
         <h1>Teerex Store</h1>
-        <img src="/assets/logo-icon.svg" alt="logo" />
+        <img src="/assets/logo-icon.svg" alt="Teerex Store logo" />
       </div>
-      
+
       <ul className='menu'>
         {location.pathname.substring(1) === "cart" ?
           <li className='menu-item'>
             <Link to="/">Products</Link>
           </li>
-          : 
-            <li className="menu-item">
-              <Link to="/cart">
-                <img src="/assets/cart-icon.svg" alt="cart navigation" />
-                <span>{ cart && cart.length && cart.length}</span>
-              </Link>
-            </li>}
+          :
+          <li className="menu-item">
+            <Link to="/cart">
+              <img src="/assets/cart-icon.svg" alt="cart" />
+              <span>{cart && cart.length && cart.length}</span>
+            </Link>
+          </li>}
       </ul>
     </div>
   )

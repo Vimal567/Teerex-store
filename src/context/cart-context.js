@@ -17,7 +17,7 @@ export const CartProvider = ({ children }) => {
     if (duplicate) {
       return enqueueSnackbar(DUPLICATE, { variant: 'warning' });
     }
-    setCart((prevCart) => [...prevCart, {...product, productQty: 1}]);
+    setCart((prevCart) => [...prevCart, { ...product, productQty: 1 }]);
   };
 
   // Increase product quantity
