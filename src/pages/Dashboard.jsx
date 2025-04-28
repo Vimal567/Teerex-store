@@ -27,10 +27,10 @@ const Dashboard = () => {
       setProducts(response.data);
       setFilteredProducts(response.data);
     } catch (error) {
-      // setIsLoading(false);
+      setIsLoading(false);
       enqueueSnackbar(TRY_AGAIN, { variant: 'error' });
     } finally {
-      // setIsLoading(false);
+      setIsLoading(false);
     }
   };
 
