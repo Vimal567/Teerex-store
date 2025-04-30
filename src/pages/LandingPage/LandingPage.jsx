@@ -81,6 +81,14 @@ const LandingPage = () => {
     modalRef.current.style.display = 'none';
   };
 
+  const formatCurrency = (price, currency) => {
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency,
+      maximumFractionDigits: 0,
+    }).format(price);
+  };
+
   useEffect(() => {
     applyAllFilters(searchValue);
   }, [colourFilterData, genderFilterData, priceFilterData, clothTypeFilter, searchValue]);
@@ -95,7 +103,7 @@ const LandingPage = () => {
       {isLoading ? <div className='loading-container'>Loading Please wait...</div> : <Fragment>
         <div className="search-container">
           <input type="search" name="search" id="search" placeholder='Search for products...' onChange={initiateSearch} />
-          <div className="search-button-container" >
+          <div className="search-icon-container" >
             <img src="assets/search-icon.svg" alt="search icon" />
           </div>
           <div className="filter-button-container" onClick={openFilter}>
@@ -118,7 +126,7 @@ const LandingPage = () => {
           </div>
 
           <div className="product-grid-section">
-            {filteredProducts && filteredProducts.length && filteredProducts.map((product, index) => {
+            {filteredProducts && filteredProducts.length ? filteredProducts.map((product, index) => {
               return <div className="product-card" key={index}>
                 <img src={product.imageURL} alt="product" />
                 <div className="details-container">
@@ -126,12 +134,15 @@ const LandingPage = () => {
                     {product.name}
                   </span>
                   <span>
-                    Rs. {product.price}
+                    {formatCurrency(product.price, product.currency)}
                   </span>
                 </div>
                 <button type='button' onClick={() => addToCart(product)}>Add to Cart</button>
               </div>
-            })}
+            }) :
+              <div className='no-products-found'>
+                No products found
+              </div>}
           </div>
         </div>
 

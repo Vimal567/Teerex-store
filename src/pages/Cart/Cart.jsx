@@ -48,7 +48,7 @@ const Cart = () => {
               <h2>Order Summary</h2>
               <br />
               <div className='total-products'>Total Products: {cart.length}</div>
-              <div className='cart-total'>Cart total: &#8377;{cart.reduce((total, product) => total + product.price * product.productQty, 0)}</div>
+              <div className='cart-total'>Total amount: &#8377;{cart.reduce((total, product) => total + product.price * product.productQty, 0)}</div>
               <button type='button' onClick={placeOrder}>Checkout</button>
             </div>
           </div>
@@ -65,7 +65,7 @@ const Cart = () => {
 
       <div className='mobile-checkout-section'>
         <div className='mobile-checkout-container'>
-          <div className='total'>Cart total: &#8377;{cart.reduce((total, product) => total + product.price * product.productQty, 0)}</div>
+          <div className='total'>Total amount: &#8377;{cart.reduce((total, product) => total + product.price * product.productQty, 0)}</div>
           <div className='checkout' onClick={placeOrder}>Checkout</div>
         </div>
       </div>
