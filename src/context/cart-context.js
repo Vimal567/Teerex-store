@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react';
 import { useSnackbar } from 'notistack';
-import { DUPLICATE, MAX_QUANTITY, ORDER_PLACED } from '../constants/constant';
+import { DUPLICATE, MAX_QUANTITY, ORDER_PLACED } from '../constants/constants';
 import { useNavigate } from 'react-router-dom';
 
 const CartContext = createContext();

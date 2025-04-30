@@ -12,9 +12,9 @@ This is a frontend application built to showcase the TeeRex Store, a fictional e
 ## Tech Stack
 
 - **React**: The core framework for building the user interface.
-- **React Router**: For routing between different pages (e.g., home, product page, cart).
+- **React Router**: For routing between different pages (e.g., Landing page, cart).
 - **CSS**: For styling the components with responsive design.
-- **State Management**: Using React’s `useState` and `useContext` for managing the cart and filtering state.
+- **State Management**: Using React’s `useState` and `useContext` for managing the cart.
 
 ## Installation
 

@@ -1,5 +1,5 @@
 import "./Filter.css";
-import { COLOURS_LIST, GENDER_LIST, PRICE_LIST, CLOTH_TYPE_LIST } from '../../constants/constant';
+import { COLOURS_LIST, GENDER_LIST, PRICE_LIST, CLOTH_TYPE_LIST } from '../../constants/constants';
 
 const Filter = ({
   colourFilterData,
@@ -47,8 +47,9 @@ const Filter = ({
               value={gender}
               checked={genderFilterData.includes(gender)}
               onChange={(event) => onFilterChange(event, setGenderFilterData)}
+              id={gender}
             />
-            <label>{gender}</label>
+            <label htmlFor={gender}>{gender}</label>
           </div>
         ))}
       </div>

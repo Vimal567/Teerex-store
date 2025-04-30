@@ -3,7 +3,7 @@ import './LandingPage.css';
 import Filter from '../../components/Filter/Filter';
 import { useSnackbar } from 'notistack';
 import axios from 'axios';
-import { TRY_AGAIN, ENDPOINT } from '../../constants/constant';
+import { TRY_AGAIN, ENDPOINT } from '../../constants/constants';
 import CartContext from '../../context/cart-context';
 
 const LandingPage = () => {
@@ -137,7 +137,7 @@ const LandingPage = () => {
 
         <div className="filter-modal" ref={modalRef}>
           <div className="filter-section">
-            <button onClick={closeFilter}>
+            <button type='button' title='close' onClick={closeFilter}>
               <img src="assets/close-icon.svg" alt="close icon" />
             </button>
             <Filter

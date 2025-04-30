@@ -16,7 +16,7 @@ const Header = () => {
       </div>
 
       <ul className='menu'>
-        {location.pathname.substring(1) === "cart" ?
+        {location.pathname === "/cart" ?
           <li className='menu-item'>
             <Link to="/">Products</Link>
           </li>
@@ -24,7 +24,7 @@ const Header = () => {
           <li className="menu-item">
             <Link to="/cart">
               <img src="/assets/cart-icon.svg" alt="cart" />
-              <span>{cart && cart.length && cart.length}</span>
+              <span>{cart?.length || 0}</span>
             </Link>
           </li>}
       </ul>

@@ -19,21 +19,26 @@ const Cart = () => {
                 <div className='product-image'>
                   {<img src={product.imageURL} alt='product' />}
                   <div className='update-quantity'>
-                    <span>
-                      {product.productQty > 1 ?
-                        <img src='/assets/minus-icon.svg' onClick={() => decreaseProductQuantity(product.id)} alt='reduce quantity' /> :
-                        <img src='/assets/delete-icon.svg' onClick={() => removeFromCart(product.id)} alt='reduce quantity' />
-                      }
-                    </span>
+                    {product.productQty > 1 ?
+                      <button title='Decrease quantity' onClick={() => decreaseProductQuantity(product.id)}>
+                        <img src='/assets/minus-icon.svg' alt='reduce quantity' />
+                      </button>
+                      :
+                      <button title='Delete item' onClick={() => removeFromCart(product.id)}>
+                        <img src='/assets/delete-icon.svg' alt='reduce quantity' />
+                      </button>
+                    }
                     {product.productQty}
-                    <span><img src='/assets/plus-icon.svg' onClick={() => increaseProductQuantity(product.id)} alt='increase quantity' /></span>
+                    <button title='Increase quantity' onClick={() => increaseProductQuantity(product.id)}>
+                      <img src='/assets/plus-icon.svg' alt='increase quantity' />
+                    </button>
                   </div>
                 </div>
                 <div className='product-details'>
                   <h3>{product.name}</h3>
                   <div className='price'>Price &#8377;: {product.price}</div>
                   <div className='total'>Total Price &#8377;: {product.price * product.productQty}</div>
-                  <button type='button' onClick={() => removeFromCart(product.id)}>Delete</button>
+                  <button type='button' title='Delete item' onClick={() => removeFromCart(product.id)}>Delete</button>
                 </div>
               </div>
             })}
